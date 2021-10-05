@@ -1,6 +1,22 @@
 @use "base";
 
 .my-atropos {
-  width: 320px;
-  height: 160px;
+  width: 600px;
+  height: 300px;
+}
+
+.container {
+  width: min(75%, 1400px);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  margin-bottom: 2em;
+}
+
+h1 {
+  font-size: 4rem;
+  text-transform: uppercase;
 }
