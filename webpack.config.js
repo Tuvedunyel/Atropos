@@ -1,15 +1,16 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
   entry: {
-    main: path.resolve(__dirname, "src/js/script.js"),
+    script: path.resolve(__dirname, "src/js/script.js"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
-    assetModfuleFilename: "[name][ext]",
+    assetModuleFilename: "[name][ext]",
     clean: true,
   },
   devtool: "inline-source-map",
@@ -22,11 +23,11 @@ module.exports = {
     rules: [
       {
         test: /\.(s[ac]|c|)ss$/,
-        use: [MiniCssExtractPlugin.loadern, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        text: /\.js$/,
-        exlude: /node_modules/,
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
@@ -36,5 +37,12 @@ module.exports = {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      title: "Atropos",
+      filename: "index.html",
+      template: path.resolve(__dirname, "src/temp.html"),
+    }),
+  ],
 };
